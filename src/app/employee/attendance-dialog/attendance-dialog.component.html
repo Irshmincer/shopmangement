@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Mark Attendance</h2>
+<mat-dialog-content>
+  <form [formGroup]="attendanceForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Employee ID</mat-label>
+      <input matInput formControlName="employeeId" type="number">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Attendance Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="Present">Present</mat-option>
+        <mat-option value="Absent">Absent</mat-option>
+        <mat-option value="Leave">Leave</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Cancel</button>
+  <button mat-button color="primary" (click)="saveAttendance()" [disabled]="!attendanceForm.valid">Save</button>
+</mat-dialog-actions>
