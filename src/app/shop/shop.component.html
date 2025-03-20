@@ -2,26 +2,26 @@
     <button mat-raised-button color="primary" (click)="openShopDialog()">Add Shop</button>
   </div>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 "  >
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>ID</th>
       <td mat-cell *matCellDef="let shop">{{ shop.id }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="name">
+    <ng-container matColumnDef="Shop_Name">
       <th mat-header-cell *matHeaderCellDef>Shop Name</th>
-      <td mat-cell *matCellDef="let shop">{{ shop.name }}</td>
+      <td mat-cell *matCellDef="let shop">{{ shop.Shop_Name }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="address">
+    <ng-container matColumnDef="Address">
       <th mat-header-cell *matHeaderCellDef>Address</th>
-      <td mat-cell *matCellDef="let shop">{{ shop.address }}</td>
+      <td mat-cell *matCellDef="let shop">{{ shop.Address }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="rent">
+    <ng-container matColumnDef="Rent_Amount">
       <th mat-header-cell *matHeaderCellDef>Rent</th>
-      <td mat-cell *matCellDef="let shop">{{ shop.rent | currency:'INR' }}</td>
+      <td mat-cell *matCellDef="let shop">{{ shop.Rent_Amount  }}</td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
@@ -30,7 +30,7 @@
         <button mat-icon-button color="accent" (click)="openShopDialog(shop)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="deleteShop(shop.id)">
+        <button mat-icon-button color="warn" (click)="onDelete(shop)">
           <mat-icon>delete</mat-icon>
         </button>
       </td>

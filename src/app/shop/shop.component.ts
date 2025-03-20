@@ -1,61 +1,77 @@
-import { Component } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
+import { ShopService } from '../service/shop.service';
+import { HttpClientModule } from '@angular/common/http';
+import { shop } from '../service/shop.model';
 import { ShopDialogComponent } from './shop-dialog/shop-dialog.component';
 
-export interface Shop {
-  id: number;
-  name: string;
-  address: string;
-  rent: number;
-}
 
-const SHOP_DATA: Shop[] = [
-  { id: 1, name: 'Super Mart', address: 'Main Road', rent: 15000 },
-  { id: 2, name: 'Mega Store', address: 'Central Street', rent: 20000 }
-];
+
 
 @Component({
   selector: 'app-shop',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatButtonModule, MatIconModule, MatDialogModule],
+  imports: [CommonModule, MatTableModule, MatButtonModule, MatIconModule, MatDialogModule, HttpClientModule],
   templateUrl: './shop.component.html',
-  styleUrl: './shop.component.scss'
+  styleUrl: './shop.component.scss',
+  providers: [ShopService]
 })
-export class ShopComponent {
-  displayedColumns: string[] = ['id', 'name', 'address', 'rent', 'actions'];
-  dataSource = [...SHOP_DATA];
+export class ShopComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'Shop_Name', 'Address', 'Rent_Amount', 'actions'];
+  dataSource = new MatTableDataSource<shop>([]);;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private shopservice: ShopService) {}
+  ngOnInit(): void {
+  this.loadShop()
+  }
 
-  openShopDialog(shop?: Shop) {
+
+  loadShop(){
+    this.shopservice.getAllShop().subscribe(result => {
+      this.dataSource.data = result;
+
+    }
+    )
+  }
+
+
+  openShopDialog(shop?: shop) {
     const dialogRef = this.dialog.open(ShopDialogComponent, {
+      height: '350px  ',
       width: '400px',
-      data: shop ? { ...shop } : {}
+      data: shop ? { ...shop } : {} // Pass a copy of the shop data
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         if (shop) {
           // Update existing shop
-          const index = this.dataSource.findIndex(s => s.id === shop.id);
+          const index = this.dataSource.data.findIndex(s => s.id === shop.id);
           if (index !== -1) {
-            this.dataSource[index] = result;
+            this.dataSource.data[index] = Object.assign({}, result); // Ensure object reference updates
           }
         } else {
           // Add new shop
-          result.id = this.dataSource.length + 1;
-          this.dataSource.push(result);
+          this.dataSource.data.push(result);
         }
-        this.dataSource = [...this.dataSource]; // Refresh table
+
+        // Assign new reference to trigger change detection
+        this.dataSource.data = [...this.dataSource.data];
+        this.loadShop()
       }
     });
   }
 
-  deleteShop(id: number) {
-    this.dataSource = this.dataSource.filter(shop => shop.id !== id);
+  onDelete(shop: any): void {
+    if (confirm('Are you sure you want to delete this shop?')) {
+      this.shopservice.deleteShop(shop.id).subscribe(response => {
+        console.log('Deleted shop:', response);
+        this.loadShop()
+      });
+    }
   }
 }

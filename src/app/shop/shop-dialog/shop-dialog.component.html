@@ -1,21 +1,24 @@
-<h1 mat-dialog-title>{{ data.id ? 'Edit Shop' : 'Add Shop' }}</h1>
-<div mat-dialog-content>
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Shop Name</mat-label>
-    <input matInput [(ngModel)]="data.name">
-  </mat-form-field>
+<h1 style="display: flex;justify-content: center;" mat-dialog-title>{{ data.id ? 'Edit Shop' : 'Add Shop' }}</h1>
+<div mat-dialog-content   >
+  <div style="display: flex;justify-content: center;flex-direction: column;align-items: center;">
 
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Shop Address</mat-label>
-    <input matInput [(ngModel)]="data.address">
-  </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Shop Name</mat-label>
+      <input matInput [(ngModel)]="data.Shop_Name">
+    </mat-form-field>
 
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Rent</mat-label>
-    <input matInput type="number" [(ngModel)]="data.rent">
-  </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Shop Address</mat-label>
+      <input matInput [(ngModel)]="data.Address">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Rent Amount</mat-label>
+      <input matInput type="number" [(ngModel)]="data.Rent_Amount">
+    </mat-form-field>
+  </div>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="onSave()">Save</button>
+<div mat-dialog-actions style="display: flex;justify-content: center;gap:1rem">
+  <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+  <button  mat-flat-button color="primary" (click)="onSave()">Save</button>
 </div>

@@ -1,18 +1,20 @@
-<h1 mat-dialog-title>{{ data.id ? 'Edit Stock' : 'Create Stock' }}</h1>
-<div mat-dialog-content>
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Stock Name</mat-label>
-    <mat-select [(ngModel)]="data.name">
-      <mat-option *ngFor="let stockType of stockTypes" [value]="stockType">{{ stockType }}</mat-option>
-    </mat-select>
-  </mat-form-field>
+<h1 style="display: flex;justify-content: center;" mat-dialog-title>{{ data.id ? 'Edit Shop' : 'Add Shop' }}</h1>
+<div mat-dialog-content   >
+  <div style="display: flex;justify-content: center;flex-direction: column;align-items: center;">
 
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Quantity</mat-label>
-    <input matInput type="number" [(ngModel)]="data.quantity">
-  </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Stock Name</mat-label>
+      <input matInput [(ngModel)]="data.StockName">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Quantity</mat-label>
+      <input matInput  [(ngModel)]="data.Quantity">
+    </mat-form-field>
+  </div>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="onSave()">Add Stock</button>
+<div mat-dialog-actions style="display: flex;justify-content: center;gap:1rem">
+  <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+  <button  mat-flat-button color="primary" (click)="onSave()">Save</button>
 </div>
