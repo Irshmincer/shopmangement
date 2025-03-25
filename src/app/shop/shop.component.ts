@@ -8,7 +8,8 @@ import { ShopService } from '../service/shop.service';
 import { HttpClientModule } from '@angular/common/http';
 import { shop } from '../service/shop.model';
 import { ShopDialogComponent } from './shop-dialog/shop-dialog.component';
-
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 
 
 
@@ -73,5 +74,16 @@ export class ShopComponent implements OnInit {
         this.loadShop()
       });
     }
+  }
+
+  exportToExcel() {
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.dataSource.data);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Shops');
+
+    // Generate and save file
+    const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    const data: Blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+    saveAs(data, 'Shops.xlsx');
   }
 }

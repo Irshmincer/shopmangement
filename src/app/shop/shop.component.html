@@ -1,41 +1,51 @@
-<div class="header">
+<div style="padding:1rem">
+
+
+  <div class="header">
     <button mat-raised-button color="primary" (click)="openShopDialog()">Add Shop</button>
-  </div>
+    <p style="font-size: 20px;"><b>List of Shops</b></p>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 "  >
+      <button mat-raised-button color="accent" (click)="exportToExcel()">
+        Download as Excel
+      </button>
+    </div>
 
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>ID</th>
-      <td mat-cell *matCellDef="let shop">{{ shop.id }}</td>
-    </ng-container>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 "  >
 
-    <ng-container matColumnDef="Shop_Name">
-      <th mat-header-cell *matHeaderCellDef>Shop Name</th>
-      <td mat-cell *matCellDef="let shop">{{ shop.Shop_Name }}</td>
-    </ng-container>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let shop">{{ shop.id }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="Address">
-      <th mat-header-cell *matHeaderCellDef>Address</th>
-      <td mat-cell *matCellDef="let shop">{{ shop.Address }}</td>
-    </ng-container>
+      <ng-container matColumnDef="Shop_Name">
+        <th mat-header-cell *matHeaderCellDef>Shop Name</th>
+        <td mat-cell *matCellDef="let shop">{{ shop.Shop_Name }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="Rent_Amount">
-      <th mat-header-cell *matHeaderCellDef>Rent</th>
-      <td mat-cell *matCellDef="let shop">{{ shop.Rent_Amount  }}</td>
-    </ng-container>
+      <ng-container matColumnDef="Address">
+        <th mat-header-cell *matHeaderCellDef>Address</th>
+        <td mat-cell *matCellDef="let shop">{{ shop.Address }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>Actions</th>
-      <td mat-cell *matCellDef="let shop">
-        <button mat-icon-button color="accent" (click)="openShopDialog(shop)">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="onDelete(shop)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="Rent_Amount">
+        <th mat-header-cell *matHeaderCellDef>Rent</th>
+        <td mat-cell *matCellDef="let shop">{{ shop.Rent_Amount  }}</td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let shop">
+          <button mat-icon-button color="accent" (click)="openShopDialog(shop)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="onDelete(shop)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+

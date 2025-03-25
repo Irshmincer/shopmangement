@@ -1,0 +1,38 @@
+
+
+.heading {
+    font-size: 20px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+   // padding: 16px;
+    max-height: 60vh; /* Ensures proper scrolling */
+    text-align: center;
+  }
+
+  .mat-form-field {
+    width: 100%;
+
+  }
+
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px;
+  }
+
+  button {
+    min-width: 80px;
+  }
+
+
+  .flex{
+    display: flex;
+    flex-direction: column;
+  }

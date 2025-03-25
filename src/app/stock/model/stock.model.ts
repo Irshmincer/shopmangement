@@ -1,5 +1,5 @@
 export interface stock{
     id:number;
-    stock_Name: string;
-    quantity : string;
+    StockType: string;
+    Quantity : string;
 }

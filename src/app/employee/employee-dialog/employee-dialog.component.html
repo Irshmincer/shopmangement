@@ -1,23 +1,24 @@
-<h2 mat-dialog-title>{{ data.id ? 'Edit Employee' : 'Create Employee' }}</h2>
-<mat-dialog-content>
-  <form [formGroup]="employeeForm">
-    <mat-form-field appearance="fill">
-      <mat-label>Name</mat-label>
-      <input matInput formControlName="name">
+<h1 style="display: flex;justify-content: center;" mat-dialog-title>{{ data.id ? 'Edit Employee' : 'Add Employee' }}</h1>
+<div mat-dialog-content style="padding-top:10px"  >
+  <div style="display: flex;justify-content: center;flex-direction: column;align-items: center;">
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Employee Name</mat-label>
+      <input matInput [(ngModel)]="data.name">
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Mobile</mat-label>
-      <input matInput formControlName="mobile">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Phone Number</mat-label>
+      <input matInput [(ngModel)]="data.mobile">
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline" class="full-width">
       <mat-label>Address</mat-label>
-      <input matInput formControlName="address">
+      <input matInput  [(ngModel)]="data.address">
     </mat-form-field>
-  </form>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="dialogRef.close()">Cancel</button>
-  <button mat-button color="primary" (click)="saveEmployee()" [disabled]="!employeeForm.valid">Save</button>
-</mat-dialog-actions>
+  </div>
+</div>
+<div mat-dialog-actions style="display: flex;justify-content: center;gap:1rem">
+  <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+  <button  mat-flat-button color="primary" (click)="onSave()">Save</button>
+</div>
