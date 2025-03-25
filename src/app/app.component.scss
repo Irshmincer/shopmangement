@@ -36,3 +36,9 @@ mat-toolbar {
     margin-bottom: 16px;
     background-color: rgba(255, 255, 255, 0.5);
   }
+
+  .active-menu {
+    background-color: #1976d2; /* Primary color */
+    color: white;
+    border-radius: 5px;
+  }
